@@ -88,6 +88,7 @@ def process_event(event):
 
 btn_up = -1
 btn_down = -1
+btn_wifi = -1
 f = open(PATH_VOLUMEJOY + "button.cfg", 'w')
 js_devs, js_fds = open_devices()
 
@@ -107,6 +108,14 @@ while btn_down == -1:
             btn_down = process_event(event)
     time.sleep(0.1)
 
-f.write(str(btn_up) + " " + str(btn_down))
+print "Push a button for Wifi On/Off"
+while btn_up == -1:
+    for fd in js_fds:
+        event = read_event(fd)
+        if event:
+            btn_wifi = process_event(event)
+    time.sleep(0.1)
+
+f.write(str(btn_up) + " " + str(btn_down) + " " + str(btn_wifi))
 f.close()
 

@@ -31,6 +31,7 @@ event_size = struct.calcsize(event_format)
 js_fds = []
 btn_up = -1
 btn_down = -1
+btn_wifi = -1
 
 def run_cmd(cmd):
     # runs whatever in the cmd variable
@@ -82,6 +83,20 @@ def read_event(fd):
         else:
             return event
 
+def disp_volume():
+    vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
+    if vol < 5:
+        vol = 0
+    if vol > 95:
+        vol = 100
+
+    run_cmd("killall -9 pngvolume")
+    os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "volume" + str(vol/6) + ".png &")
+
+def disp_wifi(wifi):
+    run_cmd("killall -9 pngvolume")
+    os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "wifi-" + (wifi)? "on" : "off" + ".png &")
+
 def process_event(event):
 
     (js_time, js_value, js_type, js_number) = struct.unpack(event_format, event)
@@ -99,21 +114,22 @@ def process_event(event):
             print "Decrease volume..."
             vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
             run_cmd("amixer set PCM -- " + str(vol-6) + "%")
+            disp_volume()
         elif js_number == btn_up:
             print "Increase volume..."
             vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
             run_cmd("amixer set PCM -- " + str(vol+6) + "%")
+            disp_volume()
+        elif js_number == btn_wifi:
+            print "Toggle Wifi..."
+            wifi = os.system('ifconfig wlan0')
+            if(wifi == 0):
+            	os.system('sudo ifdown wlan0')
+            else:
+                os.system('sudo ifup wlan0')
+            disp_wifi(wifi != 0)
         else:
             return False
- 
-        vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
-        if vol < 5:
-            vol = 0
-        if vol > 95:
-            vol = 100
-
-        run_cmd("killall -9 pngvolume")
-        os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "volume" + str(vol/6) + ".png &")
 
     return True
 
@@ -129,6 +145,7 @@ def main():
     words = line.split()
     btn_up = int(words[0])
     btn_down = int(words[1])
+    btn_wifi = int(words[1])
 
     js_fds=[]
     rescan_time = time.time()
