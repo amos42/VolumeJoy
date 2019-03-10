@@ -95,7 +95,7 @@ def disp_volume():
 
 def disp_wifi(wifi):
     run_cmd("killall -9 pngvolume")
-    os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "wifi-" + (wifi)? "on" : "off" + ".png &")
+    os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "wifi-" + ((wifi)? "on" : "off") + ".png &")
 
 def process_event(event):
 
@@ -145,7 +145,7 @@ def main():
     words = line.split()
     btn_up = int(words[0])
     btn_down = int(words[1])
-    btn_wifi = int(words[1])
+    btn_wifi = int(words[2])
 
     js_fds=[]
     rescan_time = time.time()
