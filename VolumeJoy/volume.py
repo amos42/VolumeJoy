@@ -79,7 +79,6 @@ def read_event(fd):
             if e.errno == errno.EWOULDBLOCK:
                 return None
             return False
-
         else:
             return event
 
@@ -115,10 +114,17 @@ def process_event(event):
             run_cmd("amixer set PCM -- " + str(vol-6) + "%")
             disp_volume()
         elif js_number == btn_up:
-            print "Increase volume..."
-            vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
-            run_cmd("amixer set PCM -- " + str(vol+6) + "%")
-            disp_volume()
+            #print "Increase volume..."
+            #vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
+            #run_cmd("amixer set PCM -- " + str(vol+6) + "%")
+            #disp_volume()
+            print "Toggle Wifi..."
+            wifi = os.system("ifconfig wlan0")
+            if(wifi == 0):
+            	os.system("sudo ifdown wlan0")
+            else:
+                os.system("sudo ifup wlan0")
+            disp_wifi(wifi != 0)
         elif js_number == btn_wifi:
             print "Toggle Wifi..."
             wifi = os.system("ifconfig wlan0")
