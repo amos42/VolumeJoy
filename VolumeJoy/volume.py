@@ -89,13 +89,12 @@ def disp_volume():
         vol = 0
     if vol > 95:
         vol = 100
-
     run_cmd("killall -9 pngvolume")
     os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "volume" + str(vol/6) + ".png &")
 
 def disp_wifi(wifi):
     run_cmd("killall -9 pngvolume")
-    os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "wifi-" + ((wifi)? "on" : "off") + ".png &")
+    os.system(PATH_VOLUMEJOY + "pngvolume -b0x0000 -l30000 -t1000 " + PATH_VOLUMEJOY + "wifi-" + ("on" if wifi else "off") + ".png &")
 
 def process_event(event):
 
@@ -122,11 +121,11 @@ def process_event(event):
             disp_volume()
         elif js_number == btn_wifi:
             print "Toggle Wifi..."
-            wifi = os.system('ifconfig wlan0')
+            wifi = os.system("ifconfig wlan0")
             if(wifi == 0):
-            	os.system('sudo ifdown wlan0')
+            	os.system("sudo ifdown wlan0")
             else:
-                os.system('sudo ifup wlan0')
+                os.system("sudo ifup wlan0")
             disp_wifi(wifi != 0)
         else:
             return False
