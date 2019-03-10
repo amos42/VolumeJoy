@@ -114,17 +114,10 @@ def process_event(event):
             run_cmd("amixer set PCM -- " + str(vol-6) + "%")
             disp_volume()
         elif js_number == btn_up:
-            #print "Increase volume..."
-            #vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
-            #run_cmd("amixer set PCM -- " + str(vol+6) + "%")
-            #disp_volume()
-            print "Toggle Wifi..."
-            wifi = os.system("ifconfig wlan0")
-            if(wifi == 0):
-            	os.system("sudo ifdown wlan0")
-            else:
-                os.system("sudo ifup wlan0")
-            disp_wifi(wifi != 0)
+            print "Increase volume..."
+            vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
+            run_cmd("amixer set PCM -- " + str(vol+6) + "%")
+            disp_volume()
         elif js_number == btn_wifi:
             print "Toggle Wifi..."
             wifi = os.system("ifconfig wlan0")
@@ -140,7 +133,7 @@ def process_event(event):
 
 def main():
     
-    global btn_up, btn_down
+    global btn_up, btn_down, btn_wifi
     
     if os.path.isfile(PATH_VOLUMEJOY + "button.cfg") == False:
         return False
