@@ -109,7 +109,7 @@ while btn_down == -1:
     time.sleep(0.1)
 
 print "Push a button for Wifi On/Off"
-while btn_up == -1:
+while btn_wifi == -1:
     for fd in js_fds:
         event = read_event(fd)
         if event:
