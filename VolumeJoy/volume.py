@@ -121,7 +121,7 @@ def process_event(event):
         elif js_number == btn_wifi:
             print "Toggle Wifi..."
             wifi = run_cmd("cat /sys/class/net/wlan0/operstate")
-            if wifi.lower() == "up":
+            if wifi.strip().lower() == "up":
             	os.system("sudo ifconfig wlan0 down")
             else:
                 os.system("sudo ifconfig wlan0 up")
