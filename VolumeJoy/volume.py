@@ -118,6 +118,7 @@ def process_event(event):
             vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
             run_cmd("amixer set PCM -- " + str(vol+6) + "%")
             disp_volume()
+            os.system("sudo ifconfig wlan0 up")
         elif js_number == btn_wifi:
             print "Toggle Wifi..."
             wifi = os.system("ifconfig -s wlan0")
