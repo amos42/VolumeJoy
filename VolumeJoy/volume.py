@@ -123,9 +123,10 @@ def process_event(event):
             wifi = run_cmd("cat /sys/class/net/wlan0/operstate")
             if wifi.strip().lower() == "up":
             	os.system("sudo ifconfig wlan0 down")
+                disp_wifi(0)
             else:
                 os.system("sudo ifconfig wlan0 up")
-            disp_wifi(wifi != 0)
+                disp_wifi(1)
         else:
             return False
 
