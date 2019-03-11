@@ -124,7 +124,7 @@ def process_event(event):
             if(wifi == 0):
             	os.system("sudo ifconfig wlan0 down")
             else:
-                os.system("sudo ifconfig wlang0 up")
+                os.system("sudo ifconfig wlan0 up")
             disp_wifi(wifi != 0)
         else:
             return False
