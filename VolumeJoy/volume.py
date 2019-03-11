@@ -120,7 +120,7 @@ def process_event(event):
             disp_volume()
         elif js_number == btn_wifi:
             print "Toggle Wifi..."
-            wifi = os.system("ifconfig -wlan0")
+            wifi = os.system("ifconfig -s wlan0")
             if(wifi == 0):
             	os.system("sudo ifconfig wlan0 down")
             else:
