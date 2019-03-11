@@ -122,10 +122,9 @@ def process_event(event):
             print "Toggle Wifi..."
             wifi = os.system("ifconfig wlan0")
             if(wifi == 0):
-            	os.system("sudo nmcli networking off")
+            	os.system("sudo ifconfig wlan0 down")
             else:
-                os.system("sudo nmcli networking on")
-                os.system("sudo nmcli radio wifi on")
+                os.system("sudo ifconfig wlang0 up")
             disp_wifi(wifi != 0)
         else:
             return False
