@@ -2,13 +2,11 @@
 Volume & Wifi control with Joystick for RetroPie
 
 ## Install
-<pre><code>
-cd ~
+<pre><code>cd ~
 git clone https://github.com/amos42/VolumeJoy
 cd VolumeJoy
 sudo chmod +x ./install.sh
-sudo ./install.sh
-</code></pre>
+sudo ./install.sh</code></pre>
 
 
 ### Install on Console <br>
