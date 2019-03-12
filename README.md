@@ -12,7 +12,7 @@ sudo ./install.sh
 
 
 ### Install on Console <br>
-![Mini Compi](./screenshot/volumejoy.jpg)<br>
+![Mini Compi](./screenshot/volumejoy.png)<br>
 
 ### Change Volume <br>
 ![Mini Compi](./screenshot/volume.jpg)<br>
