@@ -85,7 +85,7 @@ def process_event(event):
 
     print(js_type)
 
-    if js_type == JS_EVENT_BUTTON and js_value == 1:
+    #if js_type == JS_EVENT_BUTTON and js_value == 1:
         #print "Button " + "number:" + str(js_number)
         #vol = int(run_cmd("amixer get PCM|grep -o [0-9]*%|sed 's/%//'"))
         #print vol
