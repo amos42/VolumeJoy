@@ -18,7 +18,7 @@ def changeicon(percent):
     global currentIcon
     if currentIcon != percent:
         currentIcon = percent
-        cmdLine = PNGVIEWPATH + "/pngview -b 0x000F -l 30000" + percent + " -x 590 -y 2 " + ICONPATH + "/battery" + percent + ".png &"
+        cmdLine = PNGVIEWPATH + "/pngview -b 0x000F -l 299999 -x 590 -y 2 " + ICONPATH + "/battery" + percent + ".png &"
         print(cmdLine)
         newPngViewProcessPid = int(subprocess.Popen(cmdLine.split(" ")).pid)
         out = check_output("ps aux | grep [p]ngview | awk '{ print $2 }'", shell=True)
@@ -48,7 +48,7 @@ if DEBUGMSG == 1:
 signal.signal(signal.SIGTERM, endProcess)
 signal.signal(signal.SIGINT, endProcess)
 
-#os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 590 -y 5 " + ICONPATH + "/blank.png &")
+#os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 590 -y 2 " + ICONPATH + "/blank.png &")
 
 ser = serial.Serial("/dev/ttyACM0", 9600, timeout=3)
 
