@@ -18,16 +18,16 @@ def changeicon(percent):
     global currentIcon
     if currentIcon != percent:
         currentIcon = percent
-        cmdLine = PNGVIEWPATH + "/pngview2 -b 0x000F -l 30000 -x 590 -y 2 " + ICONPATH + "/battery" + percent + ".png &"
+        cmdLine = PNGVIEWPATH + "/pngview -b 0x000F -l 30000 -x 590 -y 2 " + ICONPATH + "/battery" + percent + ".png &"
         #print(cmdLine)
         #newPngViewProcessPid = int(subprocess.Popen(cmdLine.split(" ")).pid)
-        #out = check_output("ps aux | grep [p]ngview2 | awk '{ print $2 }'", shell=True)
+        #out = check_output("ps aux | grep [p]ngview | awk '{ print $2 }'", shell=True)
         #for pid in out.split('\n'):
         #    if pid.isdigit() and int(pid) != newPngViewProcessPid:
         #        if DEBUGMSG == 1:
         #            print("killing: " + str(pid))
         #        os.system("kill " + pid)
-        os.system("killall -9 pngview2")
+        os.system("sudo killall -9 pngview")
         os.system(cmdLine)
         if DEBUGMSG == 1:
             print("Changed battery icon to " + percent + "%")
@@ -47,8 +47,8 @@ if DEBUGMSG == 1:
     print("Batteries dangerous voltage: 	" + str(VOLT0))
 
 # Prepare handlers for process exit
-signal.signal(signal.SIGTERM, endProcess)
-signal.signal(signal.SIGINT, endProcess)
+#signal.signal(signal.SIGTERM, endProcess)
+#signal.signal(signal.SIGINT, endProcess)
 
 #os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 590 -y 2 " + ICONPATH + "/blank.png &")
 
