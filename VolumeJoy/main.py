@@ -18,7 +18,7 @@ def changeicon(percent):
     global currentIcon
     if currentIcon != percent:
         currentIcon = percent
-        cmdLine = PNGVIEWPATH + "/pngvolume -b 0x0000 -l 30000 -x 590 -y 2 " + ICONPATH + "/battery" + percent + ".png &"
+        cmdLine = PNGVIEWPATH + "/pngview -b 0x0000 -l 30000 -x 590 -y 2 " + ICONPATH + "/battery" + percent + ".png &"
         #cmdLine = PNGVIEWPATH + "/pngvolume -b0x0000 -l30000 -x 590 -y 2 " + ICONPATH + "/volume5.png &"
         #print(cmdLine)
         #newPngViewProcessPid = int(subprocess.Popen(cmdLine.split(" ")).pid)
@@ -28,8 +28,8 @@ def changeicon(percent):
         #        if DEBUGMSG == 1:
         #            print("killing: " + str(pid))
         #        os.system("kill " + pid)
-        #os.system("sudo killall -9 pngview")
-        os.system("sudo killall -9 pngvolume")
+        os.system("sudo killall -9 pngview")
+        #os.system("sudo killall -9 pngvolume")
         os.system(cmdLine)
         if DEBUGMSG == 1:
             print("Changed battery icon to " + percent + "%")
