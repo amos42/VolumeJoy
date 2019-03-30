@@ -54,15 +54,22 @@ ser = serial.Serial("/dev/ttyACM0", 9600, timeout=3)
 
 while True:
     ret = 0
-    ser.write("battery\n");    
-    res = ser.readline()
-    tok = res.split(":")
-    if tok[0] == "Suc":
-        ret = float(tok[1].strip())
-	if ret == 0:
-	    continue
+    try:
+        ser.write("battery\n");
+        ser.flush()
+        while ser.out_waiting:
+            time.sleep(0.01)
+        res = ser.readline()
+        tok = res.split(":")
+        if tok[0] == "Suc":
+            ret = float(tok[1].strip())
+    except serial.SerialException:
+        time.sleep(REFRESH_RATE)
+        continue
 	   
-    if ret < VOLT0:
+    if ret == 0:
+        print("Valide Voltage")
+    elif ret < VOLT0:
         if status != 0:
             changeicon("0")
             if CLIPS == 1:
