@@ -40,7 +40,7 @@ ADCCHANNEL = 0
 REFRESH_RATE = 2
 
 # Display some debug values when set to 1, and nothing when set to 0
-DEBUGMSG = 1
+DEBUGMSG = 0
 
 # Voltage value measured by the MCP3008 when batteries are fully charged. It should be near 3.3V due to Raspberry Pi GPIO compatibility)
 # Be careful to edit below this line.
