@@ -50,16 +50,18 @@ signal.signal(signal.SIGINT, endProcess)
 
 #os.system(PNGVIEWPATH + "/pngview -b 0 -l 299999 -x 560 -y 5 " + ICONPATH + "/blank.png &")
 
-ser = serial.Serial("/dev/ttyACM0", 9600)
+ser = serial.Serial("/dev/ttyACM0", 9600, timeout=3)
 
 while True:
     ret = 0
-    ser.write("battery\n");
+    ser.write("battery\n");    
     res = ser.readline()
     tok = res.split(":")
     if tok[0] == "Suc":
-       ret = float(tok[1].strip())
-
+        ret = float(tok[1].strip())
+	if ret == 0:
+	    continue
+	   
     if ret < VOLT0:
         if status != 0:
             changeicon("0")
