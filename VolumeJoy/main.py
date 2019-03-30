@@ -19,7 +19,7 @@ def changeicon(percent):
     if currentIcon != percent:
         currentIcon = percent
         #cmdLine = PNGVIEWPATH + "/pngview -b 0x000F -l 30000 -x 590 -y 2 " + ICONPATH + "/battery" + percent + ".png &"
-        cmdLine = PNGVIEWPATH + "/pngvolume -b0x0000 -l30000 -t1000 " + ICONPATH + "/volume5.png &"
+        cmdLine = PNGVIEWPATH + "/pngvolume -b0x0000 -l30000 " + ICONPATH + "/volume5.png &"
         #print(cmdLine)
         #newPngViewProcessPid = int(subprocess.Popen(cmdLine.split(" ")).pid)
         #out = check_output("ps aux | grep [p]ngview | awk '{ print $2 }'", shell=True)
